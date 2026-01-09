@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mentalidad de Combate - Sistema de retos progresivos para desarrollar disciplina mental y física">
+    <title>Mentalidad de Combate</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Fuentes deportivas de Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Video de fondo -->
+    <video autoplay muted loop playsinline class="bg-video" id="bgVideo">
+        <source src="background.mp4" type="video/mp4">
+    </video>
+    
+    <!-- Capa de superposición para oscurecer el video -->
+    <div class="video-overlay"></div>
+
+    <!-- Encabezado principal -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">🧠🥊 Mentalidad de Combate</h1>
+            <nav class="main-nav">
+                <button class="nav-btn active" data-section="home">Inicio</button>
+                <button class="nav-btn" data-section="challenges">Retos</button>
+                <button class="nav-btn" data-section="progress">Progreso</button>
+            </nav>
+            <div class="streak-container">
+                <span class="streak-icon">🔥</span>
+                <span class="streak-count" id="streakCount">0</span>
+                <span class="streak-label">días</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="main">
+        <!-- Sección: Inicio / Modo Combate -->
+        <section class="content-section section-home active" id="homeSection">
+            <section class="hero" id="heroSection">
+                <div class="hero-content">
+                    <p class="hero-main-phrase">"La pelea más dura es contra ti mismo"</p>
+                    <p class="hero-sub-phrase">Supera la pereza. Domina tu mente. Conquista tu día.</p>
+                    
+                    <!-- Selector de duración del round -->
+                    <div class="round-selector">
+                        <p class="selector-label">Duración del Round:</p>
+                        <div class="round-options">
+                            <button class="round-option" data-duration="60">1 min</button>
+                            <button class="round-option active" data-duration="180">3 min</button>
+                            <button class="round-option" data-duration="300">5 min</button>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary btn-combat" id="combatBtn">
+                        Entrar en Modo Combate
+                    </button>
+                </div>
+            </section>
+
+            <!-- Panel de combate (oculto inicialmente) -->
+            <section class="combat-panel" id="combatPanel">
+                <div class="timer-container">
+                    <div class="round-info">
+                        <span class="round-label">ROUND DE FOCO</span>
+                        <span class="round-number" id="roundNumberDisplay">#1</span>
+                    </div>
+                    <div class="timer-display" id="timerDisplay">
+                        <span class="timer-minutes">03</span>
+                        <span class="timer-separator">:</span>
+                        <span class="timer-seconds">00</span>
+                    </div>
+                    <div class="timer-progress">
+                        <div class="timer-progress-bar" id="progressBar"></div>
+                    </div>
+                </div>
+
+                <div class="quote-container">
+                    <p class="quote-text" id="quoteText"></p>
+                    <span class="quote-category" id="quoteCategory"></span>
+                </div>
+
+                <div class="combat-controls">
+                    <button class="btn btn-secondary" id="cancelBtn">Rendirse</button>
+                    <button class="btn btn-primary" id="resetBtn">Reiniciar</button>
+                </div>
+            </section>
+
+            <!-- Panel de victoria -->
+            <section class="victory-panel" id="victoryPanel">
+                <div class="victory-content">
+                    <h2 class="victory-title">¡ROUND COMPLETADO!</h2>
+                    <div class="victory-icon">🏆</div>
+                    <p class="victory-message" id="victoryMessage"></p>
+                    <div class="victory-actions">
+                        <button class="btn btn-secondary" id="restBtn">Descansar</button>
+                        <button class="btn btn-primary" id="nextRoundBtn">Siguiente Ronda</button>
+                    </div>
+                    <p class="between-rounds-message" id="betweenRoundsMessage"></p>
+                </div>
+            </section>
+        </section>
+
+        <!-- Sección: Retos de Combate -->
+        <section class="content-section section-challenges" id="challengesSection">
+            <div class="section-header">
+                <h2 class="section-title">Retos de Combate</h2>
+                <p class="section-subtitle">Elige tu desafío y forja tu mejor versión</p>
+            </div>
+            
+            <div class="challenges-grid">
+                <!-- Reto 100 Días de Flexiones -->
+                <div class="challenge-card" id="pushupChallenge">
+                    <div class="challenge-header">
+                        <span class="challenge-icon">💪</span>
+                        <h3 class="challenge-title">100 Días de Flexiones</h3>
+                    </div>
+                    <div class="challenge-info">
+                        <p class="challenge-description">Fortalece tu cuerpo y tu voluntad con un programa progresivo de 100 días.</p>
+                        <div class="challenge-progress">
+                            <div class="progress-info">
+                                <span class="progress-day">Día <span id="pushupDay">1</span>/100</span>
+                                <span class="progress-reps" id="pushupReps">10 flexiones</span>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" id="pushupProgressBar"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary challenge-btn" id="completePushupBtn">Completar Día</button>
+                    <button class="btn btn-secondary challenge-btn" id="resetPushupBtn">Reiniciar Progreso</button>
+                </div>
+
+                <!-- Reto Mental 30 Días -->
+                <div class="challenge-card" id="mentalChallenge">
+                    <div class="challenge-header">
+                        <span class="challenge-icon">🧠</span>
+                        <h3 class="challenge-title">30 Días de Disciplina</h3>
+                    </div>
+                    <div class="challenge-info">
+                        <p class="challenge-description">Desarrolla hábitos mentales sólidos con retos diarios de autocontrol.</p>
+                        <div class="daily-task">
+                            <span class="task-label">Reto de hoy:</span>
+                            <p class="task-text" id="mentalTaskText">Cargando...</p>
+                        </div>
+                        <div class="challenge-progress">
+                            <div class="progress-info">
+                                <span class="progress-day">Día <span id="mentalDay">1</span>/30</span>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" id="mentalProgressBar"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary challenge-btn" id="completeMentalBtn">Completar Reto</button>
+                    <button class="btn btn-secondary challenge-btn" id="resetMentalBtn">Reiniciar Progreso</button>
+                </div>
+
+                <!-- Reto Físico Diario -->
+                <div class="challenge-card" id="dailyChallenge">
+                    <div class="challenge-header">
+                        <span class="challenge-icon">⚡</span>
+                        <h3 class="challenge-title">Reto Físico Diario</h3>
+                    </div>
+                    <div class="challenge-info">
+                        <p class="challenge-description">Ejercicios aleatorios para mantener tu cuerpo en movimiento.</p>
+                        <div class="daily-exercise" id="dailyExercise">
+                            <span class="exercise-label">Ejercicio del día:</span>
+                            <p class="exercise-text" id="exerciseText">Cargando...</p>
+                            <p class="exercise-reps" id="exerciseReps"></p>
+                        </div>
+                    </div>
+                    <div class="exercise-animation" id="exerciseAnimation">
+                        <div class="animation-icon">🏋️</div>
+                        <div class="animation-text">¡力量的象征!</div>
+                    </div>
+                    <button class="btn btn-primary challenge-btn" id="completeExerciseBtn">Completar Ejercicio</button>
+                    <button class="btn btn-secondary challenge-btn" id="newExerciseBtn">Nuevo Ejercicio</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección: Progreso -->
+        <section class="content-section section-progress" id="progressSection">
+            <div class="section-header">
+                <h2 class="section-title">Tu Progreso</h2>
+                <p class="section-subtitle">Cada día de esfuerzo te hace más fuerte</p>
+            </div>
+            
+            <div class="progress-dashboard">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-icon">🔥</span>
+                        <span class="stat-value" id="statStreak">0</span>
+                        <span class="stat-label">Días Consecutivos</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-icon">🏆</span>
+                        <span class="stat-value" id="statRounds">0</span>
+                        <span class="stat-label">Rounds Completados</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-icon">✅</span>
+                        <span class="stat-value" id="statChallenges">0</span>
+                        <span class="stat-label">Retos Completados</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-icon">📅</span>
+                        <span class="stat-value" id="statLastActive">Hoy</span>
+                        <span class="stat-label">Última Actividad</span>
+                    </div>
+                </div>
+
+                <div class="achievements-section">
+                    <h3 class="achievements-title">Logros Desbloqueados</h3>
+                    <div class="achievements-grid" id="achievementsGrid">
+                        <div class="achievement locked" data-achievement="first-round">
+                            <span class="achievement-icon">🥊</span>
+                            <span class="achievement-name">Primer Round</span>
+                        </div>
+                        <div class="achievement locked" data-achievement="week-streak">
+                            <span class="achievement-icon">📅</span>
+                            <span class="achievement-name">Semana de Hierro</span>
+                        </div>
+                        <div class="achievement locked" data-achievement="pushup-warrior">
+                            <span class="achievement-icon">💪</span>
+                            <span class="achievement-name">Guerrero de Flexiones</span>
+                        </div>
+                        <div class="achievement locked" data-achievement="mental-master">
+                            <span class="achievement-icon">🧠</span>
+                            <span class="achievement-name">Maestro Mental</span>
+                        </div>
+                        <div class="achievement locked" data-achievement="century">
+                            <span class="achievement-icon">💯</span>
+                            <span class="achievement-name">Cien Rounds</span>
+                        </div>
+                        <div class="achievement locked" data-achievement="discipline-king">
+                            <span class="achievement-icon">👑</span>
+                            <span class="achievement-name">Rey de la Disciplina</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reset-section">
+                    <button class="btn btn-danger" id="resetAllProgress">Restablecer Todo el Progreso</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">Creado por <strong>Demiath Jiménez</strong></p>
+            <p class="footer-contact">Contacto: <a href="mailto:demiathviadero@gmail.com">demiathviadero@gmail.com</a></p>
+        </div>
+    </footer>
+
+    <!-- Panel de notificación -->
+    <div class="notification" id="notification">
+        <span class="notification-text" id="notificationText"></span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

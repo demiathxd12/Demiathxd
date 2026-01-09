@@ -1,7 +1,25 @@
-# Mentalidad de Combate - Netlify Configuration
-# This file is optional for static sites
+/**
+ * MENTALIDAD DE COMBATE 2.0
+ * Configuración de Netlify para despliegue
+ */
 
-# Cache control for assets
+[build]
+  command = "echo 'Build complete - Static site'"
+  publish = ""
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Redirección para SPA
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  conditions = {Role = []}
+
+# Headers de seguridad y rendimiento
 [[headers]]
   for = "/*"
   [headers.values]
@@ -9,30 +27,29 @@
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
-
-# Cache static assets
-[[headers]]
-  for = "/*.mp4"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000"
+    Cache-Control = "public, max-age=0, must-revalidate"
 
 [[headers]]
-  for = "/*.css"
+  for = "*.mp4"
   [headers.values]
-    Cache-Control = "public, max-age=31536000"
+    Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
-  for = "/*.js"
+  for = "*.css"
   [headers.values]
-    Cache-Control = "public, max-age=31536000"
-
-# Custom headers for fonts
-[[headers]]
-  for = "/*.woff"
-  [headers.values]
-    Access-Control-Allow-Origin = "*"
+    Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
-  for = "/*.woff2"
+  for = "*.js"
   [headers.values]
-    Access-Control-Allow-Origin = "*"
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "manifest.json"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

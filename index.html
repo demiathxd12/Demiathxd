@@ -2,13 +2,13 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="description" content="Mentalidad de Combate - Entrena tu mente como un atleta">
     <meta name="theme-color" content="#000000">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="format-detection" content="telephone=no">
-    <title>Mentalidad de Combate</title>
+    <title>Mentalidad de Combate - Game Edition</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -84,33 +84,32 @@
                 </div>
                 <span>Entrenar</span>
             </button>
-            <button class="nav-btn" data-section="challenges">
+            <button class="nav-btn" data-section="missions">
                 <div class="nav-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                     </svg>
                 </div>
-                <span>Desafíos</span>
+                <span>Misiones</span>
             </button>
-            <button class="nav-btn" data-section="progress">
+            <button class="nav-btn" data-section="achievements">
                 <div class="nav-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 20V10"/>
-                        <path d="M18 20V4"/>
-                        <path d="M6 20v-4"/>
+                        <circle cx="12" cy="8" r="6"/>
+                        <path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/>
                     </svg>
                 </div>
-                <span>Progreso</span>
+                <span>Logros</span>
             </button>
-            <button class="nav-btn" data-section="stats">
+            <button class="nav-btn" data-section="inventory">
                 <div class="nav-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M18 20V10"/>
-                        <path d="M12 20V4"/>
-                        <path d="M6 20v-6"/>
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                        <line x1="3" y1="9" x2="21" y2="9"/>
+                        <line x1="9" y1="21" x2="9" y2="9"/>
                     </svg>
                 </div>
-                <span>Análisis</span>
+                <span>Inventario</span>
             </button>
         </nav>
 
@@ -138,6 +137,14 @@
                     <!-- Timer Circular -->
                     <div class="timer-display">
                         <div class="timer-ring-wrapper">
+                            <!-- Timer Content - Centrado con grid -->
+                            <div class="timer-centered-content">
+                                <div class="timer-time">
+                                    <span id="timer-minutes">25</span><span class="timer-separator">:</span><span id="timer-seconds">00</span>
+                                </div>
+                                <div class="timer-status" id="timer-status">Listo para entrenar</div>
+                            </div>
+                            <!-- SVG Ring - Behind the content -->
                             <svg class="timer-ring" viewBox="0 0 200 200">
                                 <defs>
                                     <linearGradient id="timerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -148,14 +155,6 @@
                                 <circle class="timer-ring-bg" cx="100" cy="100" r="90"/>
                                 <circle class="timer-ring-progress" cx="100" cy="100" r="90"/>
                             </svg>
-                            <div class="timer-content">
-                                <div class="timer-time">
-                                    <span id="timer-minutes">25</span>
-                                    <span class="timer-separator">:</span>
-                                    <span id="timer-seconds">00</span>
-                                </div>
-                                <div class="timer-status" id="timer-status">Listo para entrenar</div>
-                            </div>
                         </div>
                     </div>
                     
@@ -298,6 +297,247 @@
                     </div>
                 </div>
             </section>
+
+            <!-- Sección Misiones (Game Edition) -->
+            <section id="missions-section" class="section">
+                <div class="missions-container">
+                    <!-- Boss Mission -->
+                    <div class="boss-mission-section">
+                        <div class="section-header">
+                            <h3>👹 Misión Boss</h3>
+                            <span class="boss-label">Semanal</span>
+                        </div>
+                        <div class="boss-mission-card" id="boss-mission-card">
+                            <div class="boss-mission-header">
+                                <span class="boss-icon">🐉</span>
+                                <div class="boss-info">
+                                    <h4>El Dragón</h4>
+                                    <p>14 días consecutivos</p>
+                                </div>
+                            </div>
+                            <div class="boss-progress-container">
+                                <div class="boss-progress-bar"></div>
+                                <span class="boss-progress-text">0/14</span>
+                            </div>
+                            <div class="boss-reward">
+                                <span>+1200 XP</span>
+                                <span class="bonus">+1 Escudo</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Misiones Diarias -->
+                    <div class="daily-missions-section">
+                        <div class="section-header">
+                            <h3>📅 Misiones Diarias</h3>
+                            <button class="btn-small" id="refresh-missions">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="23 4 23 10 17 10"/>
+                                    <polyline points="1 20 1 14 7 14"/>
+                                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                                </svg>
+                                Refrescar (10 🪙)
+                            </button>
+                        </div>
+                        <div class="daily-missions-list" id="daily-missions-list">
+                            <!-- Misiones generadas dinámicamente -->
+                        </div>
+                    </div>
+
+                    <!-- Misiones Semanales -->
+                    <div class="weekly-missions-section">
+                        <div class="section-header">
+                            <h3>📊 Misiones Semanales</h3>
+                        </div>
+                        <div class="weekly-missions-list" id="weekly-missions-list">
+                            <!-- Misiones generadas dinámicamente -->
+                        </div>
+                    </div>
+
+                    <!-- Recompensas de Racha -->
+                    <div class="streak-rewards-section">
+                        <div class="section-header">
+                            <h3>🔥 Recompensas de Racha</h3>
+                        </div>
+                        <div class="streak-rewards-grid">
+                            <div class="streak-reward-item">
+                                <span class="streak-days">3 días</span>
+                                <span class="streak-multiplier">+25% XP</span>
+                            </div>
+                            <div class="streak-reward-item">
+                                <span class="streak-days">7 días</span>
+                                <span class="streak-multiplier">+50% XP</span>
+                            </div>
+                            <div class="streak-reward-item">
+                                <span class="streak-days">14 días</span>
+                                <span class="streak-multiplier">+75% XP</span>
+                            </div>
+                            <div class="streak-reward-item">
+                                <span class="streak-days">30 días</span>
+                                <span class="streak-multiplier">+100% XP</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección Logros (Game Edition) -->
+            <section id="achievements-section" class="section">
+                <div class="achievements-container">
+                    <!-- Estadísticas de Logros -->
+                    <div class="achievements-stats">
+                        <div class="achievement-stat">
+                            <span class="stat-value" id="achievements-unlocked">0</span>
+                            <span class="stat-label">Desbloqueados</span>
+                        </div>
+                        <div class="achievement-stat">
+                            <span class="stat-value" id="achievement-points">0</span>
+                            <span class="stat-label">Puntos</span>
+                        </div>
+                        <div class="achievement-stat">
+                            <span class="stat-value" id="achievements-remaining">0</span>
+                            <span class="stat-label">Restantes</span>
+                        </div>
+                    </div>
+
+                    <!-- Filtros por Rareza -->
+                    <div class="rarity-filters">
+                        <button class="rarity-btn active" data-rarity="all">Todos</button>
+                        <button class="rarity-btn common" data-rarity="common">Común</button>
+                        <button class="rarity-btn uncommon" data-rarity="uncommon">Poco Común</button>
+                        <button class="rarity-btn rare" data-rarity="rare">Raro</button>
+                        <button class="rarity-btn epic" data-rarity="epic">Épico</button>
+                        <button class="rarity-btn legendary" data-rarity="legendary">Legendario</button>
+                        <button class="rarity-btn mythic" data-rarity="mythic">Mítico</button>
+                    </div>
+
+                    <!-- Categorías -->
+                    <div class="achievement-categories">
+                        <button class="category-btn active" data-category="all">Todos</button>
+                        <button class="category-btn" data-category="sessions">Sesiones</button>
+                        <button class="category-btn" data-category="streaks">Rachas</button>
+                        <button class="category-btn" data-category="time">Tiempo</button>
+                        <button class="category-btn" data-category="level">Nivel</button>
+                        <button class="category-btn" data-category="special">Especial</button>
+                        <button class="category-btn" data-category="secret">Secretos</button>
+                    </div>
+
+                    <!-- Grid de Logros -->
+                    <div class="achievements-grid" id="achievements-grid">
+                        <!-- Logros generados dinámicamente -->
+                    </div>
+
+                    <!-- Logros Recientes -->
+                    <div class="recent-achievements-section">
+                        <div class="section-header">
+                            <h3>🏆 Últimos Desbloqueados</h3>
+                        </div>
+                        <div class="recent-achievements-list" id="recent-achievements-list">
+                            <!-- Logros recientes -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección Inventario (Game Edition) -->
+            <section id="inventory-section" class="section">
+                <div class="inventory-container">
+                    <!-- Monedas y Gemas -->
+                    <div class="currency-display">
+                        <div class="currency-item coins">
+                            <span class="currency-icon">🪙</span>
+                            <span class="currency-value" id="coin-count">0</span>
+                            <span class="currency-label">Monedas</span>
+                        </div>
+                        <div class="currency-item gems">
+                            <span class="currency-icon">💎</span>
+                            <span class="currency-value" id="gem-count">0</span>
+                            <span class="currency-label">Gemas</span>
+                        </div>
+                    </div>
+
+                    <!-- Power-ups -->
+                    <div class="powerups-section">
+                        <div class="section-header">
+                            <h3>⚡ Power-ups</h3>
+                        </div>
+                        <div class="powerups-grid">
+                            <div class="powerup-card">
+                                <div class="powerup-icon">✨</div>
+                                <div class="powerup-info">
+                                    <h4>Boost XP</h4>
+                                    <p>2x XP por 1 hora</p>
+                                    <span class="powerup-count" id="powerup-xp-boost">0/5</span>
+                                </div>
+                                <button class="powerup-use-btn" data-powerup="xpBoost">Usar</button>
+                            </div>
+                            <div class="powerup-card">
+                                <div class="powerup-icon">🎯</div>
+                                <div class="powerup-info">
+                                    <h4>Puntos Dobles</h4>
+                                    <p>2x puntos por misión</p>
+                                    <span class="powerup-count" id="powerup-double-points">0/3</span>
+                                </div>
+                                <button class="powerup-use-btn" data-powerup="doublePoints">Usar</button>
+                            </div>
+                            <div class="powerup-card">
+                                <div class="powerup-icon">🛡️</div>
+                                <div class="powerup-info">
+                                    <h4>Escudo</h4>
+                                    <p>Protege tu racha</p>
+                                    <span class="powerup-count" id="powerup-shield">0/2</span>
+                                </div>
+                                <button class="powerup-use-btn" data-powerup="shield">Usar</button>
+                            </div>
+                            <div class="powerup-card">
+                                <div class="powerup-icon">⏰</div>
+                                <div class="powerup-info">
+                                    <h4>Extensión</h4>
+                                    <p>+5 min al timer</p>
+                                    <span class="powerup-count" id="powerup-time-extend">0/10</span>
+                                </div>
+                                <button class="powerup-use-btn" data-powerup="timeExtend">Usar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Títulos Desbloqueados -->
+                    <div class="titles-section">
+                        <div class="section-header">
+                            <h3>🏅 Títulos</h3>
+                        </div>
+                        <div class="titles-list" id="unlocked-titles">
+                            <!-- Títulos -->
+                        </div>
+                    </div>
+
+                    <!-- Estadísticas del Jugador -->
+                    <div class="player-stats-section">
+                        <div class="section-header">
+                            <h3>📊 Estadísticas</h3>
+                        </div>
+                        <div class="player-stats-grid">
+                            <div class="player-stat">
+                                <span class="stat-value" id="stat-total-xp">0</span>
+                                <span class="stat-label">XP Total</span>
+                            </div>
+                            <div class="player-stat">
+                                <span class="stat-value" id="stat-total-sessions">0</span>
+                                <span class="stat-label">Sesiones Totales</span>
+                            </div>
+                            <div class="player-stat">
+                                <span class="stat-value" id="stat-total-time">0h</span>
+                                <span class="stat-label">Tiempo Total</span>
+                            </div>
+                            <div class="player-stat">
+                                <span class="stat-value" id="stat-best-streak">0</span>
+                                <span class="stat-label">Mejor Racha</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
 
             <!-- Sección Progreso -->
             <section id="progress-section" class="section">
@@ -611,14 +851,157 @@
                             </svg>
                             <h3>Apariencia</h3>
                         </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <label>Tema Visual</label>
+                                <p class="setting-desc">Elige tu estilo preferido</p>
+                            </div>
+                            <div class="theme-selector">
+                                <button class="theme-btn active" data-theme="combat" title="Combate">
+                                    <span class="theme-preview combat"></span>
+                                </button>
+                                <button class="theme-btn" data-theme="dark" title="Oscuro">
+                                    <span class="theme-preview dark"></span>
+                                </button>
+                                <button class="theme-btn" data-theme="warrior" title="Guerrero">
+                                    <span class="theme-preview warrior"></span>
+                                </button>
+                                <button class="theme-btn" data-theme="light" title="Claro">
+                                    <span class="theme-preview light"></span>
+                                </button>
+                            </div>
+                        </div>
                         <div class="setting-item slider-item">
                             <div class="setting-info">
                                 <label>Brillo del fondo</label>
+                                <p class="setting-desc">Ajusta la visibilidad del video</p>
                             </div>
                             <input type="range" id="video-brightness" min="0" max="100" value="30">
                         </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <label>Animaciones</label>
+                                <p class="setting-desc">Efectos visuales al completar</p>
+                            </div>
+                            <label class="toggle">
+                                <input type="checkbox" id="setting-animations" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
                     </div>
-                    
+
+                    <!-- Sección de Entrenamiento -->
+                    <div class="settings-group">
+                        <div class="settings-group-header">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                            </svg>
+                            <h3>Entrenamiento</h3>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <label>Meta Diaria</label>
+                                <p class="setting-desc">Sesiones por día objetivo</p>
+                            </div>
+                            <div class="goal-selector">
+                                <button class="goal-btn" data-goal="4">4</button>
+                                <button class="goal-btn active" data-goal="6">6</button>
+                                <button class="goal-btn" data-goal="8">8</button>
+                                <button class="goal-btn" data-goal="10">10</button>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <label>Sonido del Temporizador</label>
+                                <p class="setting-desc">Audio al comenzar/parar</p>
+                            </div>
+                            <label class="toggle">
+                                <input type="checkbox" id="setting-sound" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item slider-item">
+                            <div class="setting-info">
+                                <label>Volumen</label>
+                                <p class="setting-desc">Nivel de audio global</p>
+                            </div>
+                            <input type="range" id="setting-volume" min="0" max="100" value="70">
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <label>Vibración</label>
+                                <p class="setting-desc">Feedback háptico (móvil)</p>
+                            </div>
+                            <label class="toggle">
+                                <input type="checkbox" id="setting-vibration" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <label>Auto-Descanso</label>
+                                <p class="setting-desc">Iniciar descanso automáticamente</p>
+                            </div>
+                            <label class="toggle">
+                                <input type="checkbox" id="setting-auto-break">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <label>Notificaciones Diarias</label>
+                                <p class="setting-desc">Recordatorios para entrenar</p>
+                            </div>
+                            <label class="toggle">
+                                <input type="checkbox" id="setting-notifications">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Sección de Datos -->
+                    <div class="settings-group">
+                        <div class="settings-group-header">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="7 10 12 15 17 10"/>
+                                <line x1="12" y1="15" x2="12" y2="3"/>
+                            </svg>
+                            <h3>Datos y Progreso</h3>
+                        </div>
+                        <div class="stats-preview">
+                            <div class="stat-preview-item">
+                                <span class="stat-preview-value" id="stat-level">1</span>
+                                <span class="stat-preview-label">Nivel</span>
+                            </div>
+                            <div class="stat-preview-item">
+                                <span class="stat-preview-value" id="stat-xp">0</span>
+                                <span class="stat-preview-label">XP Total</span>
+                            </div>
+                            <div class="stat-preview-item">
+                                <span class="stat-preview-value" id="stat-streak">0</span>
+                                <span class="stat-preview-label">Racha</span>
+                            </div>
+                        </div>
+                        <button id="export-data" class="btn btn-secondary">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="7 10 12 15 17 10"/>
+                                <line x1="12" y1="15" x2="12" y2="3"/>
+                            </svg>
+                            Exportar Datos
+                        </button>
+                        <button id="import-data" class="btn btn-secondary">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="17 8 12 3 7 8"/>
+                                <line x1="12" y1="3" x2="12" y2="15"/>
+                            </svg>
+                            Importar Datos
+                        </button>
+                        <input type="file" id="file-input" accept=".json" style="display: none;">
+                    </div>
+
                     <!-- Peligro -->
                     <div class="settings-group danger-zone">
                         <div class="settings-group-header">
@@ -673,8 +1056,8 @@
             </div>
         </div>
 
-        <!-- Panel de Frase -->
-        <div class="quote-banner" id="quote-banner">
+        <!-- Panel de Frase - Sistema Nuevo de Tarjetas de Sabiduría -->
+        <div class="quote-banner hidden" id="quote-banner">
             <div class="quote-icon">
                 <svg viewBox="0 0 24 24" fill="currentColor">
                     <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
@@ -685,6 +1068,72 @@
                 <cite id="quote-author">- Robert Collier</cite>
             </div>
         </div>
+
+        <!-- Botón Flotante de Sabiduría -->
+        <button class="wisdom-fab" id="wisdom-fab" title="Inspiración">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+        </button>
+
+        <!-- Panel de Tarjetas de Sabiduría Interactivas -->
+        <div class="wisdom-overlay hidden" id="wisdom-overlay">
+            <div class="wisdom-panel">
+                <div class="wisdom-header">
+                    <h3>Sabiduría Diaria</h3>
+                    <button class="wisdom-close" id="wisdom-close">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 6L6 18M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Filtros de Categoría -->
+                <div class="wisdom-categories" id="wisdom-category-badges">
+                    <span class="category-badge active" data-category="all">Todas</span>
+                    <span class="category-badge" data-category="disciplina">Disciplina</span>
+                    <span class="category-badge" data-category="resiliencia">Resiliencia</span>
+                    <span class="category-badge" data-category="mente">Mente</span>
+                    <span class="category-badge" data-category="accion">Acción</span>
+                    <span class="category-badge" data-category="tiempo">Tiempo</span>
+                    <span class="category-badge" data-category="exito">Éxito</span>
+                    <span class="category-badge" data-category="boxeo">Boxeo</span>
+                </div>
+
+                <!-- Tarjeta de Sabiduría -->
+                <div class="wisdom-card-container">
+                    <div class="wisdom-card" id="wisdom-card">
+                        <div class="wisdom-card-icon">💡</div>
+                        <p class="wisdom-card-content" id="wisdom-card-content">"La disciplina es hacer lo que tienes que hacer, incluso cuando no quieres hacerlo."</p>
+                        <cite class="wisdom-card-author" id="wisdom-card-author">- Anónimo</cite>
+
+                        <!-- Acciones de la tarjeta -->
+                        <div class="wisdom-card-actions">
+                            <button class="wisdom-action-btn" id="wisdom-prev" title="Anterior">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M15 18l-6-6 6-6"/>
+                                </svg>
+                            </button>
+                            <button class="wisdom-action-btn" id="wisdom-dismiss" title="Cerrar">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M18 6L6 18M6 6l12 12"/>
+                                </svg>
+                            </button>
+                            <button class="wisdom-action-btn" id="wisdom-next" title="Siguiente">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 18l6-6-6-6"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Indicador de cuántas citas hay -->
+                <div class="wisdom-footer">
+                    <p>💡 Desliza o usa los botones para ver más sabiduría</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Audio -->
@@ -692,6 +1141,6 @@
         <source src="timer-end.mp3" type="audio/mpeg">
     </audio>
 
-    <script src="script.js"></script>
+    <script src="game-system.js"></script>
 </body>
 </html>
